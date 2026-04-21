@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BotControl Enterprise - Inbox</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#42474f",
+              surface: "#f8f9ff",
+              "tertiary-fixed-dim": "#c4c7c9",
+              "on-secondary-fixed": "#001c39",
+              "primary-fixed-dim": "#a0c9ff",
+              "on-error-container": "#93000a",
+              tertiary: "#313436",
+              "surface-container-highest": "#d3e4fe",
+              "on-secondary-container": "#003e73",
+              "on-background": "#0b1c30",
+              "inverse-surface": "#213145",
+              "on-primary-fixed": "#001c37",
+              "on-surface": "#0b1c30",
+              error: "#ba1a1a",
+              "surface-container": "#e5eeff",
+              "on-primary-fixed-variant": "#07497d",
+              "surface-container-low": "#eff4ff",
+              "surface-dim": "#cbdbf5",
+              "on-tertiary-container": "#b8bbbc",
+              "surface-tint": "#2d6197",
+              "on-tertiary-fixed": "#191c1e",
+              primary: "#00355f",
+              "on-secondary-fixed-variant": "#004883",
+              "secondary-container": "#68abff",
+              "outline-variant": "#c2c7d1",
+              "primary-container": "#0f4c81",
+              "on-primary": "#ffffff",
+              outline: "#727780",
+              "primary-fixed": "#d2e4ff",
+              background: "#f8f9ff",
+              "on-tertiary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "on-primary-container": "#8ebdf9",
+              "tertiary-container": "#474b4d",
+              "surface-bright": "#f8f9ff",
+              secondary: "#0060ac",
+              "error-container": "#ffdad6",
+              "surface-variant": "#d3e4fe",
+              "on-error": "#ffffff",
+              "on-tertiary-fixed-variant": "#444749",
+              "secondary-fixed": "#d4e3ff",
+              "on-secondary": "#ffffff",
+              "surface-container-high": "#dce9ff",
+              "secondary-fixed-dim": "#a4c9ff",
+              "tertiary-fixed": "#e0e3e5",
+              "inverse-primary": "#a0c9ff",
+              "inverse-on-surface": "#eaf1ff"
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem"
+            },
+            spacing: {
+              stack_md: "1rem",
+              chat_max_width: "800px",
+              gutter: "1rem",
+              sidebar_width: "260px",
+              margin_page: "2rem",
+              stack_sm: "0.5rem",
+              stack_lg: "1.5rem"
+            },
+            fontFamily: {
+              h2: ["Manrope"],
+              "label-caps": ["Inter"],
+              "body-sm": ["Inter"],
+              h1: ["Manrope"],
+              "body-base": ["Inter"],
+              "chat-text": ["Inter"],
+              "mono-data": ["monospace"]
+            },
+            fontSize: {
+              h2: ["20px", { lineHeight: "28px", fontWeight: "600" }],
+              "label-caps": ["11px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }],
+              "body-sm": ["13px", { lineHeight: "18px", fontWeight: "400" }],
+              h1: ["24px", { lineHeight: "32px", fontWeight: "700" }],
+              "body-base": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+              "chat-text": ["14px", { lineHeight: "22px", fontWeight: "400" }],
+              "mono-data": ["12px", { lineHeight: "16px", fontWeight: "400" }]
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        vertical-align: middle;
+      }
+      .chat-scroll-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .chat-scroll-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body class="bg-background font-body-base text-on-surface antialiased">
+    <aside
+      id="leftNav"
+      class="flex flex-col h-full w-[260px] fixed left-0 top-0 z-50 pt-4 bg-white border-r border-slate-200 transition-all duration-200 ease-in-out font-h1 text-[14px] font-semibold"
+    >
+      <div class="px-6 mb-8">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 bg-primary rounded flex items-center justify-center text-white">
+            <span class="material-symbols-outlined">smart_toy</span>
+          </div>
+          <div>
+            <h1 class="text-lg font-black text-slate-900 tracking-tight">BotControl</h1>
+            <p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Centro de control</p>
+          </div>
+        </div>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="flex items-center gap-3 bg-slate-100 text-blue-700 border-l-[3px] border-blue-700 px-4 py-3 transition-colors"
+          href="#"
+        >
+          <span class="material-symbols-outlined" data-icon="forum">forum</span>
+          <span>Bandeja</span>
+        </a>
+      </nav>
+      <div class="mt-auto border-t border-slate-100 py-4">
+        <a
+          id="logoutBtn"
+          class="flex items-center gap-3 text-slate-600 px-4 py-3 hover:bg-slate-50 transition-colors cursor-pointer"
+        >
+          <span class="material-symbols-outlined" data-icon="logout">logout</span>
+          <span>Salir</span>
+        </a>
+      </div>
+    </aside>
+
+    <main id="mainWrap" class="ml-[260px] h-screen flex flex-col overflow-hidden">
+      <header
+        class="flex justify-between items-center w-full px-6 h-16 bg-white border-b border-slate-200 z-40 font-h1 text-sm antialiased"
+      >
+        <div class="flex items-center gap-6 flex-1">
+          <button
+            id="toggleLeftNav"
+            class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors"
+            type="button"
+            title="Ocultar/mostrar menú"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="relative w-full max-w-md">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+            <input
+              id="search"
+              class="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-lg text-sm focus:ring-2 focus:ring-blue-700/20 outline-none"
+              placeholder="Buscar conversaciones..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            id="toggleRight"
+            class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-colors"
+            type="button"
+            title="Ocultar/mostrar panel"
+          >
+            <span class="material-symbols-outlined">dock_to_right</span>
+          </button>
+          <div class="flex items-center gap-2 pl-4 border-l border-slate-100">
+            <div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden"></div>
+            <span id="me" class="font-bold text-slate-900">—</span>
+          </div>
+        </div>
+      </header>
+
+      <section class="flex flex-1 overflow-hidden">
+        <div class="w-[340px] flex flex-col border-r border-slate-200 bg-white">
+          <div class="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+            <span class="font-h2 text-h2 text-slate-900">Conversaciones</span>
+            <span id="count" class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[10px] font-bold">0</span>
+          </div>
+          <div class="p-4 border-b border-slate-100 flex items-center gap-2">
+            <button
+              id="tabQueue"
+              class="px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors bg-slate-100 text-blue-700 border border-slate-200"
+              type="button"
+            >
+              En cola <span id="badgeQueue" class="ml-2 text-[10px] font-bold"></span>
+            </button>
+            <button
+              id="tabMine"
+              class="px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
+              type="button"
+            >
+              Mis chats <span id="badgeMine" class="ml-2 text-[10px] font-bold"></span>
+            </button>
+            <button
+              id="tabHistory"
+              class="px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
+              type="button"
+            >
+              Historial
+            </button>
+          </div>
+          <div class="flex-1 overflow-y-auto chat-scroll-hide">
+            <div id="list"></div>
+          </div>
+        </div>
+
+        <div class="flex-1 flex flex-col bg-surface relative">
+          <div class="h-16 px-6 border-b border-slate-200 bg-white flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div
+                id="chatAvatar"
+                class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-700 font-bold"
+              >
+                —
+              </div>
+              <div>
+                <h2 id="chatHeader" class="font-h2 text-body-base font-bold text-slate-900">Selecciona un chat</h2>
+                <p id="chatMeta" class="text-[11px] text-slate-500 flex items-center gap-2"></p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <div id="chatUnread" class="bg-orange-50 text-orange-700 text-[10px] px-2 py-0.5 rounded font-bold border border-orange-100 hidden">
+                PENDIENTE
+              </div>
+              <button
+                id="closeBtn"
+                class="px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded transition-colors"
+                type="button"
+                disabled
+              >
+                Cerrar
+              </button>
+              <button
+                id="claimBtn"
+                class="px-3 py-1.5 text-xs font-semibold bg-blue-700 text-white rounded hover:bg-blue-800 transition-colors disabled:opacity-50"
+                type="button"
+                disabled
+              >
+                Tomar chat
+              </button>
+            </div>
+          </div>
+
+          <div id="chat" class="flex-1 overflow-y-auto p-6 space-y-6 flex flex-col chat-scroll-hide"></div>
+
+          <div class="p-6 bg-white border-t border-slate-200">
+            <div
+              class="relative bg-slate-50 border border-slate-200 rounded-xl overflow-hidden focus-within:border-blue-700 focus-within:ring-1 focus-within:ring-blue-700 transition-all"
+            >
+              <textarea
+                id="msgInput"
+                class="w-full p-4 bg-transparent border-none focus:ring-0 resize-none h-24 font-body-base text-slate-900 placeholder:text-slate-400 disabled:opacity-60"
+                placeholder="Escribe tu respuesta..."
+                disabled
+              ></textarea>
+              <div class="flex items-center justify-between px-4 py-2 bg-white border-t border-slate-100">
+                <div class="flex gap-2 text-slate-500">
+                  <input id="imageInput" type="file" accept="image/*" class="hidden" />
+                  <button id="imageBtn" class="p-1 hover:text-blue-700 disabled:opacity-50" type="button" disabled>
+                    <span class="material-symbols-outlined">attach_file</span>
+                  </button>
+                  <button id="imageBtn2" class="p-1 hover:text-blue-700 disabled:opacity-50" type="button" disabled>
+                    <span class="material-symbols-outlined">image</span>
+                  </button>
+                </div>
+                <button
+                  id="sendBtn"
+                  class="bg-blue-700 text-white px-4 py-1.5 rounded-lg text-sm font-bold flex items-center gap-2 hover:bg-blue-800 transition-opacity active:opacity-80 disabled:opacity-50"
+                  type="button"
+                  disabled
+                >
+                  Enviar <span class="material-symbols-outlined text-sm">send</span>
+                </button>
+              </div>
+            </div>
+            <div id="err" class="text-sm text-red-600 mt-3 hidden"></div>
+          </div>
+        </div>
+
+        <div id="rightSidebar" class="w-[300px] border-l border-slate-200 bg-white flex flex-col overflow-y-auto chat-scroll-hide">
+          <div class="p-4 border-b border-slate-100">
+            <h3 class="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-4">Respuestas rápidas</h3>
+            <div id="templatesList" class="space-y-2"></div>
+          </div>
+
+          <div class="p-4 border-b border-slate-100">
+            <h3 class="text-[11px] font-black uppercase tracking-widest text-slate-400 mb-4">Crear respuesta</h3>
+            <div class="space-y-2">
+              <input
+                id="tplTitle"
+                class="w-full text-xs bg-slate-50 border-slate-200 rounded-lg py-2"
+                placeholder="Título (ej. Saludo)"
+                type="text"
+              />
+              <textarea
+                id="tplBody"
+                class="w-full text-xs p-3 bg-slate-50 border border-slate-200 rounded-lg placeholder:text-slate-400 text-slate-700 focus:ring-blue-700/20 focus:border-blue-700 resize-none h-24"
+                placeholder="Texto del mensaje..."
+              ></textarea>
+              <button
+                id="tplAddBtn"
+                class="w-full bg-white border border-blue-700 text-blue-700 text-xs font-bold py-2 rounded-lg hover:bg-blue-50 transition-colors"
+                type="button"
+              >
+                Guardar respuesta
+              </button>
+            </div>
+          </div>
+
+          <div class="p-4 mt-auto">
+            <textarea
+              class="w-full text-xs p-3 bg-yellow-50/50 border border-yellow-200 rounded-lg placeholder:text-yellow-600/40 text-slate-700 focus:ring-yellow-400 focus:border-yellow-400"
+              placeholder="Notas internas (no visibles para el cliente)..."
+            ></textarea>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
